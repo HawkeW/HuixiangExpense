@@ -50,19 +50,19 @@
 - 点击删除按钮，可以快速删除该条记录。同时其对应的账单中的该条消费记录也将被删除。
 - 点击消费记录其它部分，将弹出修改页面。修改页面同添加页面。
 
-![01-index](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/01-index.png?raw=true?raw=true)
+![01-index](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/01-index.png?raw=true)
 
 - 在首页和账单页，点击加号icon将进入添加数据页面
 - 添加数据页位于页面下方，可以选择分类、icon、支出原因、支出金额，同时包含日期选择框（默认当前日期）和账单选择按钮。
 - 点击“对应账单”，进入账单选择页面。点击“日期输入框”，进入日期选择页面。
 
-![02-add-expense](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/02-add-expense.png?raw=true?raw=true)
+![02-add-expense](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/02-add-expense.png?raw=true)
 
 <p style='text-align:center'><strong>添加/修改支出数据</strong></p>
-![03-select-bills](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/03-select-bills.png?raw=true?raw=true)
+![03-select-bills](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/03-select-bills.png?raw=true)
 
 <p style='text-align:center'><strong>选择账单</strong></p>
-![04-select-date](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/04-select-date.png?raw=true?raw=true)
+![04-select-date](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/04-select-date.png?raw=true)
 
 <p style='text-align:center'><strong>日期选择</strong></p>
 ### 账单汇总页
