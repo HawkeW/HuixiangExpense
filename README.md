@@ -58,13 +58,16 @@
 
 ![02-add-expense](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/02-add-expense.png?raw=true)
 
-<p style='text-align:center'><strong>添加/修改支出数据</strong></p>
+**添加/修改支出数据**
+
 ![03-select-bills](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/03-select-bills.png?raw=true)
 
-<p style='text-align:center'><strong>选择账单</strong></p>
+**选择账单**
+
 ![04-select-date](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/04-select-date.png?raw=true)
 
-<p style='text-align:center'><strong>日期选择</strong></p>
+**日期选择**
+
 ### 账单汇总页
 
 - 显示用户参与的账单
@@ -72,18 +75,22 @@
 
 ![05-bills-list](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/05-bills-list.png?raw=true)
 
-<p style='text-align:center'><strong>用户账单</strong></p>
+**用户账单**
+
 - 点击右上角+，创建或者加入新的账单
 
 ![06-add-bill](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/06-add-bill.png?raw=true)
 
-<p style='text-align:center'><strong>添加账单</strong></p>
+**添加账单**
+
 ![07-create-bill](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/07-create-bill.png?raw=true)
 
-<p style='text-align:center'><strong>创建一个账单</strong></p>
+**创建一个账单**
+
 ![08-join-bill](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/08-join-bill.png?raw=true)
 
-<p style='text-align:center'><strong>通过邀请码加入一个账单</strong></p>
+**通过邀请码加入一个账单**
+
 ### 账单详情页
 
 - 显示账单详情内的消费记录
@@ -94,8 +101,9 @@
 
   ![09-bill-details](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/09-bill-details.png?raw=true)
 
-  <p style='text-align:center'><strong>账单详情</strong></p>
-**账单管理**
+  **账单详情**
+
+  **账单管理**
   
   - 点击导航栏省略号可以进行简单的账单管理
 - 有admin权限的用户可以进行【账单成员查看】、【获取邀请码】、【退出账单】操作
@@ -103,8 +111,9 @@
 
   ![10-bill-manage](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/10-bill-manage.png?raw=true)
 
-  <p style='text-align:center'><strong>账单的简单管理</strong></p>
-**账单中的数据修改/添加**
+  **账单的简单管理**
+
+  **账单中的数据修改/添加**
   
 - 账单中的修改内，会有[ 提交用户栏 ]和[用户头像]，显示数据的来源
   - user权限的用户只能修改用户本人提交的数据。
@@ -115,7 +124,8 @@
 
 ![11-add-modify-in-bill](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/11-add-modify-in-bill.png?raw=true)
 
-<p style='text-align:center'><strong>账单中添加/修改数据</strong></p>
+**账单中添加/修改数据**
+
 - 点击账单详情右上角省略号，可以获取账单邀请码，邀请成员加入
 
 ### 我的
@@ -124,7 +134,8 @@
 
 ![12-user-page](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/12-user-page.png?raw=true)
 
-<p style='text-align:center'><strong>用户页面</strong></p>
+**用户页面**
+
 # 用户
 
 ## 基本接口
