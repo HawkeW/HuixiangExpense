@@ -152,11 +152,11 @@ POST    /bills/register
 
 #### 三、请求参数
 
-| 名称        | 类型   | 说明   |
-| :---------- | :----- | :----- |
-| "userName": | String | 用户名 |
-| email       | String | 邮箱   |
-| password    | String | 密码   |
+| 名称     | 类型   | 说明   |
+| :------- | :----- | :----- |
+| userName | String | 用户名 |
+| email    | String | 邮箱   |
+| password | String | 密码   |
 
 #### 四、请求示例
 
@@ -166,9 +166,9 @@ POST    /bills/register
 
 ​	"userName":"小明",
 
-​	email: "897878405@qq.com",
+​	"email": "123456@qq.com",
 
-​	password:"123456"
+​	"password":"123456"
 
 }
 
@@ -205,7 +205,7 @@ POST    /bills/login
 
 {
 
-​	"email": "897878405@qq.com",
+​	"email": "123456@qq.com",
 
 ​	"password":"123456"
 
