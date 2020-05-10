@@ -1,0 +1,73 @@
+<template>
+	<view class="container">
+		<uni-list>
+			<uni-list-item title="" note="" v-for="(payout, index) in payouts" :key="payout.id"><payout-item :payout="payout"></payout-item></uni-list-item>
+		</uni-list>
+		<uni-fab v-if="!popped" :popMenu="false" horizontal="right" vertical="bottom" @fabClick="open"></uni-fab>
+		<uni-popup ref="popup" type="message" @change="popped=!popped">
+			
+		</uni-popup>
+	</view>
+</template>
+
+<script>
+import payoutItem from './payout.nvue';
+export default {
+	components: {
+		payoutItem
+	},
+	data() {
+		return {
+			payouts: [
+				{
+					id: '123',
+					time: '2020-05-01',
+					icon: 'icon',
+					reason: '午餐',
+					amount: 1
+				},
+				{
+					id: '133',
+					time: '2020-05-01',
+					icon: 'icon',
+					reason: '旅游',
+					amount: 1
+				},
+				{
+					id: '143',
+					time: '2020-05-01',
+					icon: 'icon',
+					reason: '晚餐',
+					amount: 2
+				},
+				{
+					id: '153',
+					time: '2020-05-01',
+					icon: 'icon',
+					reason: '交通',
+					amount: 3
+				}
+			],
+			payout: {
+				time: '2020-05-01',
+				icon: 'icon',
+				reason: '吃饭',
+				amount: 5
+			},
+			popped:false
+		};
+	},
+	methods: {
+		open(){
+			this.$refs.popup.open()
+		}
+	}
+};
+</script>
+
+<style>
+.intro {
+	font-size: 14px;
+	line-height: 24px;
+}
+</style>

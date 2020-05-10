@@ -1,0 +1,63 @@
+<template>
+		<view class="payout">
+			<text class="date right-space">{{payout.time}}</text>
+			<text class="reason-icon icon right-space">{{payout.icon}}</text>
+			<text class="reason right-space">{{payout.reason}}</text>
+			<image class="yuan icon right-space" src="../../static/image/yuan.png" mode="aspectFit" style="width: 36rpx;height: 36rpx;"></image>
+			<text class="amount right-space">{{payout.amount}}</text>
+			<image @click="deletePayout" class="delete icon" src="../../static/image/delete.png" mode="aspectFit" style="width: 40rpx;height: 40rpx;"></image>
+		</view>
+</template>
+
+<script>
+	export default {
+		name:'payout-item',
+		props:[
+			'payout'
+		],
+		data(){
+			return{
+				
+			}
+		},
+		methods:{
+			deletePayout(){
+				
+			}
+		}
+	}
+</script>
+
+<style>
+.payout {
+	display: flex;
+	flex-direction: row; 
+	font-size: 20rpx;
+}
+.right-space{
+	margin-right: 20rpx;
+}
+.date{
+	margin-left: 20rpx;
+	width: 140rpx;
+}
+.icon{
+	height: 40rpx;
+	width: 40rpx;
+}
+.reason-icon{
+	margin-left: 50rpx;
+}
+.reason{
+	margin-left: 50rpx;
+}
+.yuan{
+	margin-left: 50rpx;
+}
+.amount{
+	margin-left: 20rpx;
+}
+.delete{
+	margin-left: 20rpx;
+}
+</style>
