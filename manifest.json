@@ -1,6 +1,6 @@
 {
-    "name" : "Huixiang",
-    "appid" : "",
+    "name" : "HuixiangExpense",
+    "appid" : "__UNI__AEA9D0A",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -39,8 +39,8 @@
             "ios" : {},
             "sdkConfigs" : {}
         },
-        "nvueLaunchMode" : "fast",
-        "renderer" : "native"
+        "renderer" : "native",
+        "nvueLaunchMode" : ""
     },
     "quickapp" : {},
     "mp-weixin" : {
@@ -48,5 +48,9 @@
         "setting" : {
             "urlCheck" : true
         }
+    },
+    "h5" : {
+        "title" : "HuixiangExpense",
+        "domain" : "oncew.com"
     }
 }

@@ -1,0 +1,89 @@
+<template>
+  <view class="container">
+    <view>
+     <h-record 
+      v-for="(item,index) in dataList" 
+      :key="index"
+      :id="item.id"
+      :time="item.time" 
+      :icon="item.icon" 
+      :reason="item.reason" 
+      :money="item.money"
+      @click="modify"
+      >
+      </h-record>
+    </view>
+    <uni-popup ref="popup" type="bottom" :maskClick="true" :animation="true">
+       <uni-popup-rich title="分享到" @select="select"></uni-popup-rich>
+      <view class="bottom"></view>
+    </uni-popup>
+    <uni-fab 
+      :popMenu="false"
+      @click="open"
+      @fabClick="open"
+     ></uni-fab>
+     
+  </view>
+</template>
+
+<script>
+  import hRecord from './hRecord.vue'
+  import uniPopup from '@/components/uni-popup/uni-popup.vue'
+  import uniFab from '@/components/uni-fab/uni-fab.vue'
+  import uniPopupRich from '@/components/uni-popup/uni-popup-rich.vue'
+  export default {
+    components: {
+      hRecord,
+      uniPopup,
+      uniFab,
+      uniPopupRich
+    },
+    data() {
+      return {
+        dataList: [{
+          id:'12',
+          time: '2020.05.22',
+          icon: 'c-food-HL.png',
+          reason: '餐饮',
+          money: '20.00',
+          }, {
+            id:'13',
+            time: '2020.05.22',
+            icon: 'c-game-HL.png',
+            reason: '游戏',
+            money: '10.00',
+          }, {
+            id:'14',
+            time: '2020.05.22',
+            icon: 'c-life-HL.png',
+            reason: '生活',
+            money: '40.16',
+          }, {
+            id:'15',
+            time: '今天',
+            icon: 'c-life-HL.png',
+            reason: '交通',
+            money: '5.03',
+          }],
+        
+      }
+    },
+    methods: {
+      modify(e){
+        console.log(e)
+        this.open();
+      },
+      open(){
+        this.$refs.popup.open();
+      }
+    }
+  }
+</script>
+
+<style>
+
+.bottom{
+  height: 100rpx;
+}
+
+</style>

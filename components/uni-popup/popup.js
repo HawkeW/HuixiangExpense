@@ -13,8 +13,8 @@ const config = {
 	dialog:'center',
 	// 分享
 	share:'bottom',
-	// 详情
-	detail:'bottom'
+  // richdata
+  richdata:'bottom'
 }
 
 export default {

@@ -1,0 +1,155 @@
+<template>
+	<view class="uni-pop-rich wrapper">
+		<view class="selector wrapper-child">
+      <image class="icon" src="../../static/images/categories/c-transport.png" mode="aspectFit"></image>
+		  <text class="n-text">交通</text>
+		</view>
+    <view class="input wrapper-child">
+      <input class="input-box" v-model="money"></input>
+    </view>
+    <view class="selector wrapper-child">
+      <image class="icon" src="../../static/images/agenda.png" mode="aspectFit"></image>
+      <text class="small s-text">2020-5-14</text>
+    </view>
+    <view class="input wrapper-child">
+      <!-- <text class="input-text medium s-text">{{ reason }}</text> -->
+      <input class="input-box" v-model="reason"></input>
+    </view>
+    <view class="selector wrapper-child">
+      <image class="icon" src="../../static/images/bill.png" mode="aspectFit"></image>
+      <text class="n-text">账单</text>
+    </view>
+    <button class="btn" @click="close">确认</button>
+	</view>
+</template>
+
+<script>
+	export default {
+    name: 'UniPopupRich',
+    props:{
+      title:{
+        type:String,
+        default:"添加一条数据"
+      }
+    },
+    inject: ['popup'],
+		data() {
+			return {
+        reason:'地铁',
+        money:20
+			}
+		},
+    computed: {
+    },
+		methods: {
+			/**
+       * 定义的选择事件，选择内容后触发
+       */
+      select(item, index) {
+          // 将事件发送到页面，在页面进行监听
+          this.$emit('select', {
+              item,
+              index
+          }, () => {
+              // 延迟操作，执行父组件的close事件，关闭弹出层
+              this.popup.close()
+          })
+      },
+      /**
+       * 关闭窗口
+       */
+      close() {
+          // 执行父组件的close事件，关闭弹出层
+          this.popup.close()
+      }
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+  .uni-pop-rich{
+    height: 440rpx;
+    width: 750rpx;
+    background-color: #262626;
+    padding-top:58rpx;
+    padding-bottom:58rpx; 
+    box-sizing: border-box;
+  }
+  .wrapper{
+    display: flex;
+    flex-direction: row;
+    width: 750rpx;
+    align-content: flex-start;
+    flex-flow: wrap;
+  }
+  .wrapper-child{
+    box-sizing: border-box;
+    width: 50%;
+    height: 88rpx;
+  }
+  .selector{
+    display: flex;
+    flex-direction: row;
+    width: 250rpx;
+    height: 88rpx;
+    background-color: #FFFFFF;
+    border-style: solid;
+    border-radius: 44rpx;
+    margin-bottom: 30rpx;
+    margin-left: 30rpx;
+    line-height: 88rpx;
+  }
+  .icon{
+    height: 32rpx;
+    width: 32rpx;
+    margin-top: 28rpx;
+    margin-left: 40rpx;
+    margin-right: 16rpx;
+  }
+  .n-text{
+    font-size: 32rpx;
+    color: #333333;
+  }
+  .input{
+    width: 410rpx;
+    height: 88rpx;
+    margin-left: 30rpx;
+    background-color: #FFFFFF;
+    font-size: 32rpx;
+    text-align: center;
+    align-items: center;
+    line-height: 88rpx;
+  }
+  .input-box{
+    width: 410rpx;
+    height: 88rpx;
+    // display: none;
+    color: #73B92D;
+  }
+  .input-text{
+
+  }
+  .unit{
+    
+  }
+  .small{
+    font-size: 20rpx;
+  }
+  .medium{
+    font-size: 32rpx;
+  }
+  .s-text{
+    color:#73B92D;
+  }
+  .btn{
+    width: 410rpx;
+    height: 88rpx;
+    background-color: #73B92D;
+    border-radius: 88rpx;
+    color: #ffffff;
+    font-size: 32rpx;
+  }
+  .btn ::hover{
+    background-color: #3e7c00;
+  }
+</style>
