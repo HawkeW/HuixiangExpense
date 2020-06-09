@@ -1,5 +1,5 @@
 {
-    "name" : "HuixiangExpense",
+    "name" : "茴香豆",
     "appid" : "__UNI__AEA9D0A",
     "description" : "",
     "versionName" : "1.0.0",
@@ -50,7 +50,10 @@
         }
     },
     "h5" : {
-        "title" : "HuixiangExpense",
-        "domain" : "oncew.com"
+        "title" : "茴香豆",
+        "domain" : "oncew.com",
+        "router" : {
+            "base" : "/HuixiangExpense"
+        }
     }
 }
