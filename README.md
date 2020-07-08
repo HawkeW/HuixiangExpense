@@ -50,21 +50,21 @@
 - 点击删除按钮，可以快速删除该条记录。同时其对应的账单中的该条消费记录也将被删除。
 - 点击消费记录其它部分，将弹出修改页面。修改页面同添加页面。
 
-![01-index](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/01-index.png?raw=true)
+![01-index](https://hawkew.github.io/assets/img/04-huixiang-api/01-index.png?raw=true)
 
 - 在首页和账单页，点击加号icon将进入添加数据页面
 - 添加数据页位于页面下方，可以选择分类、icon、支出原因、支出金额，同时包含日期选择框（默认当前日期）和账单选择按钮。
 - 点击“对应账单”，进入账单选择页面。点击“日期输入框”，进入日期选择页面。
 
-![02-add-expense](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/02-add-expense.png?raw=true)
+![02-add-expense](https://hawkew.github.io/assets/img/04-huixiang-api/02-add-expense.png?raw=true)
 
 **添加/修改支出数据**
 
-![03-select-bills](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/03-select-bills.png?raw=true)
+![03-select-bills](https://hawkew.github.io/assets/img/04-huixiang-api/03-select-bills.png?raw=true)
 
 **选择账单**
 
-![04-select-date](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/04-select-date.png?raw=true)
+![04-select-date](https://hawkew.github.io/assets/img/04-huixiang-api/04-select-date.png?raw=true)
 
 **日期选择**
 
@@ -73,21 +73,21 @@
 - 显示用户参与的账单
 - 每条账单记录中显示账单对应的总支出情况。包括所有支出、月支出、日支出
 
-![05-bills-list](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/05-bills-list.png?raw=true)
+![05-bills-list](https://hawkew.github.io/assets/img/04-huixiang-api/05-bills-list.png?raw=true)
 
 **用户账单**
 
 - 点击右上角+，创建或者加入新的账单
 
-![06-add-bill](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/06-add-bill.png?raw=true)
+![06-add-bill](https://hawkew.github.io/assets/img/04-huixiang-api/06-add-bill.png?raw=true)
 
 **添加账单**
 
-![07-create-bill](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/07-create-bill.png?raw=true)
+![07-create-bill](https://hawkew.github.io/assets/img/04-huixiang-api/07-create-bill.png?raw=true)
 
 **创建一个账单**
 
-![08-join-bill](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/08-join-bill.png?raw=true)
+![08-join-bill](https://hawkew.github.io/assets/img/04-huixiang-api/08-join-bill.png?raw=true)
 
 **通过邀请码加入一个账单**
 
@@ -99,7 +99,7 @@
 
 - 在公共账单中需要对用户权限进行判断。账单权限氛围管理员（admin）和用户（user）两种。
 
-  ![09-bill-details](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/09-bill-details.png?raw=true)
+  ![09-bill-details](https://hawkew.github.io/assets/img/04-huixiang-api/09-bill-details.png?raw=true)
 
   **账单详情**
 
@@ -109,7 +109,7 @@
 - 有admin权限的用户可以进行【账单成员查看】、【获取邀请码】、【退出账单】操作
   - user权限的用户只能进行【退出账单】操作
 
-  ![10-bill-manage](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/10-bill-manage.png?raw=true)
+  ![10-bill-manage](https://hawkew.github.io/assets/img/04-huixiang-api/10-bill-manage.png?raw=true)
 
   **账单的简单管理**
 
@@ -122,7 +122,7 @@
   - admin用户修改的数据，将同步到消费记录对应用户的账单中。
   - 账单内成员可以随意查看账单详情
 
-![11-add-modify-in-bill](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/11-add-modify-in-bill.png?raw=true)
+![11-add-modify-in-bill](https://hawkew.github.io/assets/img/04-huixiang-api/11-add-modify-in-bill.png?raw=true)
 
 **账单中添加/修改数据**
 
@@ -132,7 +132,7 @@
 
 - 用户页面主要显示的是数据消费的汇总情况。
 
-![12-user-page](https://github.com/HawkeW/HawkeW.github.io/blob/master/images/04-huixiang-api/12-user-page.png?raw=true)
+![12-user-page](https://hawkew.github.io/assets/img/04-huixiang-api/12-user-page.png?raw=true)
 
 **用户页面**
 
