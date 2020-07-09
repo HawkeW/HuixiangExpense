@@ -1,39 +1,40 @@
 <template>
   <view class="uni-pop-rich wrapper">
-    <view class="selector wrapper-child" :class="{ 'selector-top':!showCate,'selector-top-none':showCate }" @click="showCate=!showCate">
-      <radio-group name="" :class="{ catesShow:showCate,  cates: !showCate }" :style="{ opacity: showCate? 1:0}">
-        <label v-for="(item,index) in reasons" :key="index" @click="showCate = false">
-          <image class="icon" :src="`../../static/images/categories/${ item.icon }`" mode="aspectFit"></image><text
-            class="n-text">{{ item.reason }}</text>
-        </label>
-      </radio-group>
-      <label>
-        <image class="icon" :src="`../../static/images/categories/c-transport.png`" mode="aspectFit"></image><text
-          class="n-text">交通</text>
-      </label>
+		<view class="wrapper-child-left">
+			<hxd-drop-menu
+			:selections="reasons" 
+			:isShow="showCate"
+			:defalt="reason"
+			@click=""/>
+		</view>
+    <view class="wrapper-child-right">
+      <input class="input input-box" v-model="money"></input>
     </view>
-    <view class="input wrapper-child">
-      <input class="input-box" v-model="money"></input>
-    </view>
-    <view class="selector wrapper-child selector-top">
-      <image class="icon" src="../../static/images/agenda.png" mode="aspectFit"></image>
+    <view class="selector wrapper-child-left selector-top">
+      <image class="icon" src="@/static/images/agenda.png" mode="aspectFit"></image>
       <text class="medium s-text">5月14日</text>
     </view>
-    <view class="input wrapper-child">
+    <view class="wrapper-child-right">
       <!-- <text class="input-text medium s-text">{{ reason }}</text> -->
-      <input class="input-box" v-model="note"></input>
+      <input class="input input-box" v-model="note"></input>
     </view>
-    <view class="selector wrapper-child selector-top">
-      <image class="icon" src="../../static/images/bill.png" mode="aspectFit"></image>
-      <text class="n-text">账单</text>
-    </view>
-    <button class="btn" @click="close">确认</button>
+		<view class="wrapper-child-left">
+			<hxd-drop-menu
+			:selections="bills" 
+			:isShow="showCate" 
+			@click=""/>
+		</view>
+    <button class="btn wrapper-child-right" @click="close" >确认</button>
   </view>
 </template>
 
 <script>
+	import hxdDropMenu from '@/components/hxd-drop-menu.vue'
   export default {
     name: 'UniPopupRich',
+		components:{
+			hxdDropMenu
+		},
     props: {
       title: {
         type: String,
@@ -74,7 +75,24 @@
         ],
         money: 20,
         showCate: false,
-        showBill: false
+        showBill: false,
+				reason:{
+					id: '1',
+					reason: '交通',
+					icon: 'c-transport.png',
+        },
+				bills:[
+					{
+					    id: '1',
+					    reason: '交通',
+					    icon: 'c-transport.png',
+					  },
+					  {
+					    id: '2',
+					    reason: '生活',
+					    icon: 'c-life.png',
+					  },
+				]
       }
     },
     computed: {},
@@ -124,62 +142,30 @@
     flex-flow: wrap;
   }
 
-  .wrapper-child {
+  .wrapper-child-left {
     box-sizing: border-box;
-    width: 50%;
+    width: 30%;
     height: 88rpx;
+		align-items: center;
   }
+	.wrapper-child-right {
+	  box-sizing: border-box;
+	  width: 60%;
+	  height: 88rpx;
+		align-items: center;
+	}
 
   .selector {
+		position: relative;
     display: flex;
     flex-direction: row;
-    width: 250rpx;
+    width: 30%;
     height: 88rpx;
     background-color: #FFFFFF;
     border-style: solid;
     border-bottom-left-radius: 44rpx;
     border-bottom-right-radius: 44rpx;
-    margin-bottom: 30rpx;
-    margin-left: 30rpx;
     line-height: 88rpx;
-  }
-
-  .selector-top {
-    transition: .5s;
-    border-top-left-radius: 44rpx;
-    border-top-right-radius: 44rpx;
-  }
-
-  .selector-top-none {
-    transition: .4s;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-
-  .catesShow {
-    border-top-right-radius: 44rpx;
-    border-top-left-radius: 44rpx;
-    transition: .4s;
-    height: 560rpx;
-    background-color: #ffffff;
-    position: absolute;
-    top: -560rpx;
-    display: flex;
-    width: 250rpx;
-    flex-direction: column;
-  }
-
-  .cates {
-    border-top-right-radius: 44rpx;
-    border-top-left-radius: 44rpx;
-    transition: .4s;
-    height: 560rpx;
-    background-color: #ffffff;
-    position: absolute;
-    top: -0rpx;
-    display: flex;
-    width: 250rpx;
-    flex-direction: column;
   }
 
   .icon {
@@ -198,7 +184,6 @@
   .input {
     width: 410rpx;
     height: 88rpx;
-    margin-left: 30rpx;
     background-color: #FFFFFF;
     font-size: 32rpx;
     text-align: center;
