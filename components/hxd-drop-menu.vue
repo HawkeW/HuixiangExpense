@@ -1,15 +1,20 @@
 <template>
 	<view class="menu">
-		<view class="box menu-item" :class="{ 'box-top': !isShow, 'box-top-none': isShow }">
+		<view class="box menu-item box-top">
 			<radio-group name="" class="radios-hide" :class="{ 'radios-show': isShow }">
-				<label v-for="(item, index) in selections" :key="index">
-					<image class="image" :src="`@/static/images/categories/${item.image}`" mode="aspectFit"></image>
+				<label 
+				v-for="(item, index) in selections" 
+				:key="index" 
+				class="item" :class="{selected:item.id===selected}"
+				@click.native="handleSelect"
+				>
+					<image class="image" :src="item.icon" mode="aspectFit"></image>
 					<text class="text">{{ item.reason }}</text>
 				</label>
 			</radio-group>
-			<label @click="isShow = !isShow">
-				<image class="image" :src="`@/static/images/categories/c-transport.png`" mode="aspectFit"></image>
-				<text class="text">交通</text>
+			<label @click.native="this.isShow=!this.isShow">
+				<image class="image" :src="current.icon" mode="aspectFit"></image>
+				<text class="text">{{current.reason}}</text>
 			</label>
 		</view>
 	</view>
@@ -18,22 +23,46 @@
 <script>
 export default {
 	data() {
-		return {};
+		return {
+			selected:null,
+			isShow:false
+		};
+	},
+	created() {
+		this.isShow = this.show;
+		this.selected = this.current.id;
 	},
 	props: {
 		selections: {
 			type: Array,
 			default: []
 		},
-		isShow: {
+		show: {
 			type: Boolean,
 			default: false
+		},
+		current:{
+			type: Object,
+			default: {}
+		}
+	},
+	methods:{
+		handleSelect(e){
+			// this.selected = e.id;
+			// this.show = !this.show;
+			console.log('hxd')
+		},
+		_updateCurrent(){
+			this.$emit("click",this.selected);
 		}
 	}
 };
 </script>
 
 <style scoped>
+.item:hover{
+	background-color: #73B92D;
+}
 .menu {
 	display: flex;
 	flex-direction: row;
@@ -62,29 +91,29 @@ export default {
 }
 
 .box-top {
-	transition: 0.5s;
+	/* transition: 0.5s; */
 	border-top-left-radius: 44rpx;
 	border-top-right-radius: 44rpx;
 }
 
-.box-top-none {
+/* .box-top-none {
 	transition: 0.4s;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
-}
+} */
 
 .radios-hide {
 	position: absolute;
 	display: flex;
 	flex-direction: column;
-	border-top-right-radius: 22px;
-	border-top-left-radius: 22px;
+	border-radius: 22px;
 	transition: all 0.4s ease;
 	max-height: 0px;
 	background-color: #ffffff;
-	bottom: 44px;
+	bottom: 0px;
 	width: 125px;
 	overflow: hidden;
+	padding-bottom: 88rpx;
 	opacity: 0;
 }
 
@@ -92,18 +121,20 @@ export default {
 	position: absolute;
 	display: flex;
 	flex-direction: column;
-	border-top-right-radius: 22px;
-	border-top-left-radius: 22px;
+	border-radius: 22px;
 	transition: all 0.4s ease;
-	max-height: 560rpx;
+	max-height: 1000rpx;
 	background-color: #ffffff;
-	bottom: 88rpx;
+	bottom: 0rpx;
 	width: 250rpx;
 	overflow: hidden;
 	opacity: 1;
 	transition: all 0.4s ease;
+	padding-bottom: 88rpx;
 }
-
+.selected{
+	background-color: #73B92D;
+}
 .image {
 	height: 32rpx;
 	width: 32rpx;
