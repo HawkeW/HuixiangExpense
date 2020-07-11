@@ -131,6 +131,7 @@
   }
 
   .selector {
+    position:relative;
     display: flex;
     flex-direction: row;
     width: 250rpx;
@@ -157,28 +158,28 @@
   }
 
   .catesShow {
+    position: absolute;
     border-top-right-radius: 44rpx;
     border-top-left-radius: 44rpx;
-    transition: .4s;
+    transition: all .4s ease;
     height: 560rpx;
     background-color: #ffffff;
-    position: absolute;
-    top: -560rpx;
+    bottom: 88rpx;
     display: flex;
     width: 250rpx;
+    overflow: hidden;
     flex-direction: column;
   }
 
   .cates {
     border-top-right-radius: 44rpx;
     border-top-left-radius: 44rpx;
-    transition: .4s;
-    height: 560rpx;
-    background-color: #ffffff;
-    position: absolute;
-    top: -0rpx;
+    transition: all .4s ease;
+    height: 0rpx;
+    bottom: 88rpx;
     display: flex;
     width: 250rpx;
+    overflow: hidden;
     flex-direction: column;
   }
 

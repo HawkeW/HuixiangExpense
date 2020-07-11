@@ -1,4 +1,4 @@
-# 项目简介
+## 项目简介
 
 本项目主要提供记账、账单共同维护等功能。
 
@@ -25,24 +25,24 @@
 - 一笔支出记录可以对应多个账单
 - 用户的每笔支出记录可以有选择的发布到有权限的任意账单
 
-# 概述
+## 概述
 
-## 基本构成
+### 基本构成
 
 - 项目主要为移动端
 
 - 1.0版移动端主要包含支出记录、账单管理、账单详情三个界面
 
-## 接口规范
+### 接口规范
 
 - 采用RESTful API（URL定位资源，HTTP请求类型描述操作）
 - 请求体采用JSON形式传输（Content-"type":application/json）
 
 **(注：在v1.0版旨在实现最核心的功能——移动端账单记录和概览)**
 
-## 页面构成
+### 页面构成
 
-### 首页
+#### 首页
 
 - 首页显示用户近期支出记录，
 - 支出记录做分页显示，暂定每页20条。可无限上划，获取下一页消费记录
@@ -68,7 +68,7 @@
 
 **日期选择**
 
-### 账单汇总页
+#### 账单汇总页
 
 - 显示用户参与的账单
 - 每条账单记录中显示账单对应的总支出情况。包括所有支出、月支出、日支出
@@ -91,7 +91,7 @@
 
 **通过邀请码加入一个账单**
 
-### 账单详情页
+#### 账单详情页
 
 - 显示账单详情内的消费记录
 
@@ -128,7 +128,7 @@
 
 - 点击账单详情右上角省略号，可以获取账单邀请码，邀请成员加入
 
-### 我的
+#### 我的
 
 - 用户页面主要显示的是数据消费的汇总情况。
 
@@ -136,21 +136,21 @@
 
 **用户页面**
 
-# 用户
+## 用户
 
-## 基本接口
+### 基本接口
 
-### 注册
+#### 注册
 
-#### 一、功能描述
+##### 一、功能描述
 
 注册
 
-#### 二、请求URI
+##### 二、请求URI
 
-POST    /bills/register
+POST   ` /bills/register`
 
-#### 三、请求参数
+##### 三、请求参数
 
 | 名称     | 类型   | 说明   |
 | :------- | :----- | :----- |
@@ -158,277 +158,246 @@ POST    /bills/register
 | email    | String | 邮箱   |
 | password | String | 密码   |
 
-#### 四、请求示例
+##### 四、请求示例
 
-**请求值：**Object
+**请求值：**`Object`
 
+```js
 {
 
-​	"userName":"小明",
+	"userName":"小明",
 
-​	"email": "123456@qq.com",
+	"email": "123456@qq.com",
 
-​	"password":"123456"
+	"password":"123456"
 
 }
+```
 
 **返回值：**
 
+```js
 {
 
-​	"status":"200",
+	"status":"200",
 
-​	"message":"注册成功"
+	"message":"注册成功"
 
 }
+```
 
-### 登录
+#### 登录
 
-#### 一、功能描述
+##### 一、功能描述
 
 登录
 
-#### 二、请求URI
+##### 二、请求URI
 
-POST    /bills/login
+POST    `/bills/login`
 
-#### 三、请求参数
+##### 三、请求参数
 
 | 名称     | 类型   | 说明 |
 | :------- | :----- | :--- |
 | email    | String | 邮箱 |
 | password | String | 密码 |
 
-#### 四、请求示例
+##### 四、请求示例
 
 **请求值：**Object
 
+```js
 {
-
-​	"email": "123456@qq.com",
-
-​	"password":"123456"
-
+	"email": "123456@qq.com",
+	"password":"123456"
 }
+```
 
 **返回值：**
 
 **成功：**
 
+```js
 {
-
-​	"status":"200",
-
-​	"message":"登录成功",
-
-​	"data":{
-
-​		"userId":"0001",
-
-​		"userName":"小明",
-
-​	}
-
+	"status":"200",
+	"message":"登录成功",    
+	"data":{
+		"userId":"0001",
+		"userName":"小明",
+	}
 }
+```
 
 **失败：**
 
 1. 密码错误
 
+```js
 {
 
-​	"status":"500",
+	"status":"500",
 
-​	"message":"密码错误"
+	"message":"密码错误"
 
 }
+```
 
 2. 邮箱未注册
 
+```js
 {
 
-​	"status":"500",
+	"status":"500",
 
-​	"message":"邮箱未注册"
+	"message":"邮箱未注册"
 
 }
+```
 
-## 查询
+### 查询
 
-### 账单成员查询
+#### 账单成员查询
 
-#### 一、功能描述
+##### 一、功能描述
 
 查询某账单的参与人员及其成员的权限
 
-#### 二、请求URI
+##### 二、请求URI
 
 Get    /bills/users/{billId}
 
-#### 三、请求参数
+##### 三、请求参数
 
 | 名称   | 类型   | 说明   |
 | :----- | :----- | :----- |
 | billId | String | 账单id |
 
-#### 四、请求示例
+##### 四、请求示例
 
 **请求值： **
 
-users/0123
+`users/0123`
 
 **返回值：**
 
+```js
 {
-
-​	"status":"200",
-
-​	"message":"",
-
-​	"data":{
-
-​		members:[
-
-​			{
-
-​				"userId":"0001", //用户id
-
-​				"userName":"小明"  //用户名
-
-​				authroity:"admin"
-
-​			},
-
-​			{
-
-​				"userId":"0002",
-
-​				"userName":"小黄"
-
-​				authroity:"user"
-
-​			}
-
-​		]
-
-​	}
-
+	"status":"200",
+	"message":"",
+	"data":{
+		members:[
+			{
+				"userId":"0001", //用户id
+				"userName":"小明"  //用户名
+				authroity:"admin"
+			},
+			{
+				"userId":"0002",
+				"userName":"小黄"
+				authroity:"user"
+			}
+		]
+	}
 }
+```
 
-# 账单数据
+## 账单数据
 
-## 分类
+### 分类
 
-### 获取分类
+#### 获取分类
 
-#### 一、功能描述
+##### 一、功能描述
 
 注册
 
-#### 二、请求URI
+##### 二、请求URI
 
 Get     /categories
 
-#### 三、请求参数
+##### 三、请求参数
 
 无
 
-#### 四、请求示例
+##### 四、请求示例
 
 **返回值**
 
+```js
 {
-
-​	"status":"200",
-
-​	"message":"查询成功",
-
-​	"data":[
-
-​		{
-
-​			"categoryId":"1",
-
-​			"categoryName":"生活"
-
-​			"startDate":"2020-05-04",
-
-​			"endDate": null,
-
-​			"type":"user"
-
-​		}
-
-​	]
-
+	"status":"200",
+	"message":"查询成功",
+	"data":[
+		{
+			"categoryId":"1",
+			"categoryName":"生活"
+			"startDate":"2020-05-04",
+			"endDate": null,
+			"type":"user"
+		}
+	]
 }
+```
 
-## 账单
+### 账单
 
-### 创建新账单
+#### 创建新账单
 
-#### 一、功能描述
+##### 一、功能描述
 
 创建新的账单
 
-#### 二、请求URI
+##### 二、请求URI
 
-POST    /bills/createBill
+POST    `/bills/createBill`
 
-#### 三、请求参数
+##### 三、请求参数
 
 | 名称     | 类型   | 说明     |
 | :------- | :----- | :------- |
 | userId   | String | 用户ID   |
 | billName | String | 账单名称 |
 
-#### 四、请求示例
+##### 四、请求示例
 
 **请求地址**：
 
 **请求值：**Object
 
+```js
 {
-
-​	"userId": "0001",
-
-​	"billName":"家庭账单"
-
+	"userId": "0001",
+	"billName":"家庭账单"
 }
+```
 
 **返回值：**
 
+```js
 {
-
-​	"status":"200",
-
-​	"message":"创建成功",
-
-​	"data":{
-
-​		"billId":"0123",
-
-​		"billName":"家庭账单",
-
-​		"startDate":"2020-05-21 08:00",
-
-​		"authority":"admin"
-
-​	}
-
+	"status":"200",
+	"message":"创建成功",
+	"data":{
+		"billId":"0123",
+		"billName":"家庭账单",
+		"startDate":"2020-05-21 08:00",
+		"authority":"admin"
+	}
 }
+```
 
-### 账单查询（List）
+#### 账单查询（List）
 
-#### 一、功能描述
+##### 一、功能描述
 
 查询用户账单列表或记账数据对应的账单
 
-#### 二、请求URI
+##### 二、请求URI
 
-POST    /bills
+POST    `/bills`
 
-#### 三、请求参数
+##### 三、请求参数
 
 | 名称      | 类型    | 说明                 |
 | :-------- | :------ | :------------------- |
@@ -437,77 +406,57 @@ POST    /bills
 | pageNum   | Integer | 分页序号             |
 | pageSize  | Integer | 分页大小             |
 
-#### 四、请求示例     
+##### 四、请求示例     
 
 **请求值：**
 
-GET    /bills?userId=0001&expenseId=&pageNum=1&pageSize=20
+GET    `/bills?userId=0001&expenseId=&pageNum=1&pageSize=20`
 
 **返回值：**
 
+```js
 {
-
-​	"status":"200",
-
-​	"message":"OK",
-
-​	"data":{
-
-​		"billList":[ //账单列表
-
-​			{
-
-​				"billId": "001",   //账单id
-
-​				"billName":"家庭支出"，  //账单名称
-
-​				"startDate":"2020-04-01 08:00", //账单创建时间
-
-​				"expense": 50 //账单金额,
-
-​				"authority":"admin"
-
-​			},
-
-​			{
-
-​				"billId": "002",   //账单id
-
-​				"billName":"买车"，  //账单名称
-
-​				"startDate":"2020-04-01 08:00", //账单创建时间
-
-​				"expense": 100000, //账单金额
-
-​				"authority":"user"
-
-​			}
-
-​		],
-
-​			 "total": 2,
-​     		 "size": 2,
-​		      "current": 1,
-​		      "pages": 1,
-​		      "orders": [],
-​		      "hitCount": false,
-   		   "searchCount": true
-
-​	}
-
+	"status":"200",
+	"message":"OK",
+	"data":{
+		"billList":[ //账单列表
+			{
+				"billId": "001",   //账单id
+				"billName":"家庭支出"，  //账单名称
+				"startDate":"2020-04-01 08:00", //账单创建时间
+				"expense": 50 //账单金额,
+				"authority":"admin"
+			},
+			{
+				"billId": "002",   //账单id
+				"billName":"买车"，  //账单名称
+				"startDate":"2020-04-01 08:00", //账单创建时间
+				"expense": 100000, //账单金额
+				"authority":"user"
+			}
+		],
+		"total": 2,
+     	"size": 2,
+		"current": 1,
+		"pages": 1,
+		"orders": [],
+		"hitCount": false,
+   		"searchCount": true
+	}
 }
+```
 
-### 账单查询（One）
+#### 账单查询（One）
 
-#### 一、功能描述
+##### 一、功能描述
 
 查询账单中的支出数据
 
-#### 二、请求URI
+##### 二、请求URI
 
-Get    bills/payouts
+Get    `bills/payouts`
 
-#### 三、请求参数
+##### 三、请求参数
 
 | 名称     | 类型    | 说明     |
 | :------- | :------ | :------- |
@@ -516,136 +465,102 @@ Get    bills/payouts
 | pageNum  | Integer | 分页序号 |
 | pageSize | Integer | 分页大小 |
 
-#### 四、请求示例
+##### 四、请求示例
 
-bills/payouts?billId=01123&userId=0001&pageNum=1&pageSize=20
+`bills/payouts?billId=01123&userId=0001&pageNum=1&pageSize=20`
 
 **返回值：**
 
+```js
 {
-
-​	"status":"200",
-
-​	"message":"OK",
-
-​	"data":{
-
-​		"billId": "123",
-
-​		"billName":"家庭开支",
-
-​		"authority": "admin", //用户在该账单的权限 "admin"/"user"
-
-​		"expenses":[
-
-​			{
-
-​				"expenseId": 001,  //支出数据id
-
-​				"userId":"0001",  //支出记录人id
-
-​				""userName":":"小明"  //支出记录人用户名
-
-​				"date":"2020-04-01 08:00", //支出时间
-
-​				"amount": 5, //支出金额
-
-​				"reason": "晚餐", //支出原因
-
-​				"category": "生活", //原因对应的类目
-
-​				"icon":"home"//icon 名称
-
-​				]
-
-​			},
-
-​			{
-
-​				"expenseId": "001",  //支出数据id
-
-​				"userId":"0001",  //支出记录人id
-
-​				""userName":":"小明"  //支出记录人用户名
-
-​				"date":"2020-04-01 08:00", //支出时间
-
-​				"amount": 5, //支出金额
-
-​				"reason": "晚餐", //支出原因
-
-​				"category": "生活", //原因对应的类目
-
-​				"icon":"home"//icon 名称
-
-​			}
-
-​		],
-
-​			 "total": 2,
-​     		 "size": 2,
-​		      "current": 1,
-​		      "pages": 1,
-​		      "orders": [],
-​		      "hitCount": false,
-   		   "searchCount": true
-
-​	}
-
+	"status":"200",
+	"message":"OK",
+	"data":{
+		"billId": "123",
+		"billName":"家庭开支",
+		"authority": "admin", //用户在该账单的权限 "admin"/"user"
+		"expenses":[
+			{
+				"expenseId": 001,  //支出数据id
+				"userId":"0001",  //支出记录人id
+				""userName":":"小明"  //支出记录人用户名
+				"date":"2020-04-01 08:00", //支出时间
+				"amount": 5, //支出金额
+				"reason": "晚餐", //支出原因
+				"category": "生活", //原因对应的类目
+				"icon":"home"//icon 名称
+				]
+			},
+			{
+				"expenseId": "001",  //支出数据id
+				"userId":"0001",  //支出记录人id
+				""userName":":"小明"  //支出记录人用户名
+				"date":"2020-04-01 08:00", //支出时间
+				"amount": 5, //支出金额
+				"reason": "晚餐", //支出原因
+				"category": "生活", //原因对应的类目
+				"icon":"home"//icon 名称
+			}
+		],
+		"total": 2,
+     	"size": 2,
+		"current": 1,
+		"pages": 1,
+		"orders": [],
+		"hitCount": false,
+   		"searchCount": true
+	}
 }
+```
 
-## 互动
+### 互动
 
-### 获取账单邀请码
+#### 获取账单邀请码
 
-#### 一、功能描述
+##### 一、功能描述
 
 获取账单加入码，用户可以通过邀请码加入此账单
 
-#### 二、请求URI
+##### 二、请求URI
 
-Get  /bills/getInvitationCode
+Get  `/bills/getInvitationCode`
 
-#### 三、请求参数
+##### 三、请求参数
 
 | 名称   | 类型   | 说明   |
 | :----- | :----- | :----- |
 | billId | String | 账单id |
 | userId | String | 用户id |
 
-#### 四、请求示例
+##### 四、请求示例
 
 **请求值：**
 
-Get  /bills/getInvitationCode?billId=0001&userId=0001
+Get  `/bills/getInvitationCode?billId=0001&userId=0001`
 
 **返回值：**
 
+```js
 {
-
-​	"status":"200",
-
-​	"message":"OK",
-
-​	"data":{
-
-​		invitationCode: "asda123" //账单邀请码
-
-​	}
-
+	"status":"200",
+	"message":"OK",
+	"data":{
+		invitationCode: "asda123" //账单邀请码
+	}
 }
+```
 
-### 通过邀请码加入账单
+#### 通过邀请码加入账单
 
-#### 一、功能描述
+##### 一、功能描述
 
 通过邀请码加入账单
 
-#### 二、请求URI
+##### 二、请求URI
 
-POST    /bills/joinBill
+POST    `/bills/joinBill`
 
-#### 三、请求参数
+##### 三、请求参数
 
 | 名称           | 类型   | 说明       |
 | :------------- | :----- | :--------- |
@@ -653,68 +568,66 @@ POST    /bills/joinBill
 | userId         | String | 用户id     |
 | invitationCode | String | 账单邀请码 |
 
-#### 四、请求示例
+##### 四、请求示例
 
 **请求值：**
 
-/bills/joinBill?billId=0001&userId=0001&invitationCode=asda123
+`/bills/joinBill?billId=0001&userId=0001&invitationCode=asda123`
 
 **返回值：**
 
+```js
 {
-
-​	"status":"200",
-
-​	"message":"成功加入账单",
-
+	"status":"200",
+	"message":"成功加入账单",
 }
+```
 
-### 退出账单
+#### 退出账单
 
-#### 一、功能描述
+##### 一、功能描述
 
 退出自己参与的账单
 
-#### 二、请求URI
+##### 二、请求URI
 
-POST    /bills/exitBill
+POST    `/bills/exitBill`
 
-#### 三、请求参数
+##### 三、请求参数
 
 | 名称   | 类型   | 说明   |
 | :----- | :----- | :----- |
 | billId | String | 账单id |
 | userId | String | 用户id |
 
-#### 四、请求示例
+##### 四、请求示例
 
 **请求值：**
 
-/bills/joinBill?billId=0001&userId=0001
+`/bills/joinBill?billId=0001&userId=0001`
 
 **返回值：**
 
+```js
 {
-
-​	"status":"200",
-
-​	"message":"成功退出账单",
-
+	"status":"200",
+	"message":"成功退出账单",
 }
+```
 
-## 记账数据
+### 记账数据
 
-### 添加支出数据(One)
+#### 添加支出数据(One)
 
-#### 一、功能描述
+##### 一、功能描述
 
 批量添加支出数据（一条或多条）到指定账单（一个或者多个）
 
-#### 二、请求URI
+##### 二、请求URI
 
-POST    bills/payouts/create
+POST    `bills/payouts/create`
 
-#### 三、请求参数
+##### 三、请求参数
 
 | 名称     | 类型   | 说明                   |
 | :------- | :----- | :--------------------- |
@@ -724,57 +637,44 @@ POST    bills/payouts/create
 
 **请求值：**Object
 
+```js
 {
-
-​	"userId":"0001", 
-
-​	"expenses": [
-
-​		{
-
-​			expenseDate:"2020-04-01 08:00", //支出时间
-
-​			expenseAmount: 5, //支出金额
-
-​			expenseReason: "晚餐", //支出原因
-
-​			expenseCategory: "生活", //原因对应的类目
-
-​			icon:""
-
-​		}
-
-​	]，
-
-​	"billId":[    //支出要添加的账单id列表
-
-​		"0001",   //账单id
-
-​	]
-
+	"userId":"0001", 
+	"expenses": [
+		{
+			"expenseDate":"2020-04-01 08:00", //支出时间
+			"expenseAmount": 5, //支出金额
+			"expenseReason": "晚餐", //支出原因
+			"expenseCategory": "生活", //原因对应的类目
+			"icon":""
+		}
+	]，
+	"billId":[    //支出要添加的账单id列表
+		"0001",   //账单id
+	]
 }
+```
 
 **返回值：**
 
+```js
 {
-
-​	"status":"200",
-
-​	"message":"添加成功"
-
+	"status":"200",
+	"message":"添加成功"
 }
+```
 
-### 更新支出数据
+#### 更新支出数据
 
-#### 一、功能描述
+##### 一、功能描述
 
 更新一条支出数据
 
-#### 二、请求URI
+##### 二、请求URI
 
-POST    /bills/payouts/update
+POST    `/bills/payouts/update`
 
-#### 三、请求参数
+##### 三、请求参数
 
 | 名称     | 类型   | 说明                        |
 | :------- | :----- | :-------------------------- |
@@ -782,75 +682,59 @@ POST    /bills/payouts/update
 | expenses | Array  | 支出数据，单个或者批量      |
 | billIds  | Array  | 支出要添加/修改的账单id列表 |
 
-**请求值：**Object
+**请求值：**`Object`
 
+```js
 {
-
-​	"userId":"0001",
-
-​	"expense":
-
-​		{
-
-​			"expenseDate":"2020-04-01 08:00", 
-
-​			"expenseAmount": 5, 
-
-​			"expenseReason": "晚餐", 
-
-​			"expenseCategory": "生活",
-
-​			"icon":""
-
-​		},
-
-​	"billId":[  
-
-​		"0001", 
-
-​	],
-
+	"userId":"0001",
+	"expense":
+		{
+			"expenseDate":"2020-04-01 08:00", 
+			"expenseAmount": 5, 
+			"expenseReason": "晚餐", 
+			"expenseCategory": "生活",
+			"icon":""
+		},
+	"billId":[  
+		"0001", 
+	],
 }
+```
 
 **返回值：**
 
 成功：
 
+```js
 {
-
-​	"status":"200",
-
-​	"message":"添加成功"
-
+	"status":"200",
+	"message":"添加成功"
 }
+```
 
 错误：
 
+```js
 {
-
-​	"status":"500",
-
-​	"message":"没有权限",
-
-​	"billids":[    //账单id列表
-
-​		"0001",   //账单id
-
-​	],
-
+	"status":"500",
+	"message":"没有权限",
+	"billids":[    //账单id列表
+		"0001",   //账单id
+	],
 }
+```
 
-### 删除数据
+#### 删除数据
 
-#### 一、功能描述
+##### 一、功能描述
 
 删除某条支出数据
 
-#### 二、请求URI
+##### 二、请求URI
 
-Delete   /bills/payouts
+Delete   `/bills/payouts`
 
-#### 三、请求参数
+##### 三、请求参数
 
 | 名称      | 类型   | 说明       |
 | :-------- | :----- | :--------- |
@@ -862,18 +746,13 @@ Delete   /bills/payouts
 
 **请求值：**Object
 
+```js
 {
-
-​	"userId":"0001", 
-
-​	"expenseId": "ac1123",
-
-​	"billids":[    //账单id列表
-
-​		"0001",   //账单id
-
-​		"0002"
-
-​	],
-
+	"userId":"0001", 
+	"expenseId": "ac1123",
+	"billids":[    //账单id列表
+		"0001",   //账单id
+		"0002"
+	],
 }
+```
