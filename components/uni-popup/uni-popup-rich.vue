@@ -47,7 +47,37 @@
       current:{
         type:Object,
         default: function() {
-          return {}
+          let obj = {
+              id: '99',
+              time: '2020-07-11',
+              reason: {
+                id: 1,
+                reason: '交通',
+                icon: '../../static/images/categories/c-transport.png',
+              },
+              bills: [{
+                  id: 2,
+                  reason: '个人账单',
+                  icon: '../../static/images/bill.png',
+                  checked: false
+                },
+                {
+                  id: 3,
+                  reason: '家',
+                  icon: '../../static/images/bill.png',
+                  checked: true
+                },
+                {
+                  id: 4,
+                  reason: '吃',
+                  icon: '../../static/images/bill.png',
+                  checked: false
+                },
+              ],
+              money: '0',
+              note: '',
+            };
+          return obj;
         }
       }
     },
@@ -89,8 +119,8 @@
       }
     },
     created() {
-      this.item = this.current;
-      console.log(this.current)
+        this.item = this.current;
+      console.log( this.current)
     },
     computed: {
       shortDate() {
@@ -126,17 +156,29 @@
          this.$emit("update", this.item);
       },
       checkBills(arr) {
-        console.log(arr)
         var billIds = [];
         billIds = arr.value;
-        this.item.bills.forEach(item => {
-          if (billIds.indexOf(item.id.toString()) !== -1) {
-            item.checked = true;
-          } else {
-            item.checked = false;
-          }
-        })
-        console.log(this.item.bills)
+        if(this.item.hasOwnProperty("id")){
+          //获取选中的账单
+          this.item.bills.forEach(bill => {
+            if (billIds.indexOf(bill.id.toString()) !== -1) {
+              bill.checked = true;
+            } else {
+              bill.checked = false;
+            }
+          })
+        }else{
+          //获取选中的账单
+          this.item.bills.forEach(bill => {
+            if (billIds.indexOf(bill.id.toString()) !== -1) {
+              bill.checked = true;
+            } else {
+              bill.checked = false;
+            }
+          })
+        }
+
+        
       },
       showCalendar() {
         this.calendarShow = !this.calendarShow;

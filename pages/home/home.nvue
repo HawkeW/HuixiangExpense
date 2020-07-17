@@ -171,11 +171,12 @@
       modify(index) {
         this.currentIndex = index;
         this.current = this.dataList[index];
-        console.log(this.current)
         this.$refs.popup.open();
       },
+      add(){
+        
+      },
       open() {
-        console.log('click fab')
         this.$refs.popup.open();
       },
       handleUpdate(data){
