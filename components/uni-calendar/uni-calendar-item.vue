@@ -19,7 +19,7 @@
 				'uni-calendar-item--isDay':calendar.fullDate === weeks.fullDate && weeks.isDay,
 				'uni-calendar-item--checked':calendar.fullDate === weeks.fullDate && !weeks.isDay,
 				'uni-calendar-item--multiple': weeks.multiple,
-				}">今天</text>
+				}">当前</text>
 			<text v-if="lunar&&!weeks.extraInfo" class="uni-calendar-item__weeks-lunar-text" :class="{
 				'uni-calendar-item--isDay-text':weeks.isDay,
 				'uni-calendar-item--isDay':calendar.fullDate === weeks.fullDate && weeks.isDay,

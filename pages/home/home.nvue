@@ -1,28 +1,26 @@
 <template>
   <view class="container">
     <view>
-     <h-record 
-      v-for="(item,index) in dataList" 
-      :key="index"
+      <h-record v-for="(item,index) in dataList" :key="index" 
+      :item="item"
       :id="item.id"
-      :time="item.time" 
-      :icon="item.icon" 
-      :reason="item.reason" 
-      :money="item.money"
-      @click="modify"
-      >
+       @modify="modify(index)"
+       >
       </h-record>
     </view>
-    <uni-popup ref="popup" type="bottom" :maskClick="true" :animation="true">
-       <uni-popup-rich title="分享到" @select="select"></uni-popup-rich>
+    <uni-popup ref="popup" type="bottom" :maskClick="true" :animation="true" >
+      <uni-popup-rich @update="handleUpdate" :current="current"></uni-popup-rich>
       <view class="bottom"></view>
     </uni-popup>
-    <uni-fab 
+    <!--    <uni-fab 
       :popMenu="false"
       @click="open"
       @fabClick="open"
-     ></uni-fab>
-     
+     ></uni-fab> -->
+    <view class="" @click="open">
+      <hxd-fab />
+    </view>
+
   </view>
 </template>
 
@@ -31,59 +29,164 @@
   import uniPopup from '@/components/uni-popup/uni-popup.vue'
   import uniFab from '@/components/uni-fab/uni-fab.vue'
   import uniPopupRich from '@/components/uni-popup/uni-popup-rich.vue'
+  import hxdFab from '@/components/hxd-fab.vue'
+
   export default {
     components: {
       hRecord,
       uniPopup,
       uniFab,
-      uniPopupRich
+      uniPopupRich,
+      hxdFab
     },
     data() {
       return {
-        dataList: [{
-          id:'12',
-          time: '2020.05.22',
-          icon: 'c-food-HL.png',
-          reason: '餐饮',
-          money: '20.00',
-          }, {
-            id:'13',
-            time: '2020.05.22',
-            icon: 'c-game-HL.png',
-            reason: '游戏',
-            money: '10.00',
-          }, {
-            id:'14',
-            time: '2020.05.22',
-            icon: 'c-life-HL.png',
-            reason: '生活',
-            money: '40.16',
-          }, {
-            id:'15',
-            time: '今天',
-            icon: 'c-life-HL.png',
-            reason: '交通',
+        dataList: [
+          {
+            id: '15',
+            time: '2020-07-11',
+            reason: {
+              id: 1,
+              reason: '交通',
+              icon: '../../static/images/categories/c-transport.png',
+            },
+            bills: [{
+                id: 2,
+                reason: '个人账单',
+                icon: '../../static/images/bill.png',
+                checked: false
+              },
+              {
+                id: 3,
+                reason: '家',
+                icon: '../../static/images/bill.png',
+                checked: true
+              },
+              {
+                id: 4,
+                reason: '吃',
+                icon: '../../static/images/bill.png',
+                checked: false
+              },
+            ],
+            money: '6.9',
+            note: '',
+          },
+          {
+            id: '16',
+            time: '2020-07-12',
+            reason: {
+              id: 2,
+              reason: '交通',
+              icon: '../../static/images/categories/c-transport.png',
+            },
+            bills: [{
+                id: 2,
+                reason: '个人账单',
+                icon: '../../static/images/bill.png',
+                checked: false
+              },
+              {
+                id: 3,
+                reason: '家',
+                icon: '../../static/images/bill.png',
+                checked: true
+              },
+              {
+                id: 4,
+                reason: '吃',
+                icon: '../../static/images/bill.png',
+                checked: false
+              },
+            ],
+            money: '3',
+            note: '',
+          },
+          {
+            id: '17',
+            time: '2020-07-15',
+            reason: {
+              id: 1,
+              reason: '交通',
+              icon: '../../static/images/categories/c-transport.png',
+            },
+            bills: [{
+                id: 2,
+                reason: '个人账单',
+                icon: '../../static/images/bill.png',
+                checked: false
+              },
+              {
+                id: 3,
+                reason: '家',
+                icon: '../../static/images/bill.png',
+                checked: true
+              },
+              {
+                id: 4,
+                reason: '吃',
+                icon: '../../static/images/bill.png',
+                checked: false
+              },
+            ],
             money: '5.03',
-          }],
-        
+            note: '',
+          },
+          {
+            id: '18',
+            time: '2020-07-17',
+            reason: {
+              id: 1,
+              reason: '交通',
+              icon: '../../static/images/categories/c-transport.png',
+            },
+            bills: [{
+                id: 2,
+                reason: '个人账单',
+                icon: '../../static/images/bill.png',
+                checked: false
+              },
+              {
+                id: 3,
+                reason: '家',
+                icon: '../../static/images/bill.png',
+                checked: true
+              },
+              {
+                id: 4,
+                reason: '吃',
+                icon: '../../static/images/bill.png',
+                checked: false
+              },
+            ],
+            money: '11',
+            note: '',
+          }
+        ],
+        current:{},
+        currentIndex:0
       }
     },
     methods: {
-      modify(e){
-        console.log(e)
-        this.open();
-      },
-      open(){
+      modify(index) {
+        this.currentIndex = index;
+        this.current = this.dataList[index];
+        console.log(this.current)
         this.$refs.popup.open();
+      },
+      open() {
+        console.log('click fab')
+        this.$refs.popup.open();
+      },
+      handleUpdate(data){
+        this.dataList[this.currentIndex] = data;
       }
     }
   }
 </script>
 
 <style>
-
-.bottom{
-  height: 100rpx;
-}
-
+  .bottom {
+    height: 100rpx;
+  }
 </style>

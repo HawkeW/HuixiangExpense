@@ -51,7 +51,7 @@
     },
     "h5" : {
         "title" : "茴香豆",
-        "domain" : "oncew.com",
+        "domain" : "",
         "router" : {
             "base" : "/HuixiangExpense"
         }

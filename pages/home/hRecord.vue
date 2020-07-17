@@ -1,14 +1,14 @@
 <template>
-  <view class="wrapper">
-    <text class="time-wrapper time">{{ time }}</text>
+  <view class="wrapper" @click="handleClick">
+    <text class="time-wrapper time">{{ shortDate }}</text>
     <view>
       </image>
     </view>
     <view class="cate-wrapper">
-      <image class="cate-icon" :src="`../../static/images/categories/${ icon }`" mode="aspectFit">
-        <text class="cate-text">{{ reason }}</text>
+      <image class="cate-icon" :src="`../../static/images/categories/${ item.icon }`" mode="aspectFit">
+        <text class="cate-text">{{ item.reason.reason }}</text>
     </view>
-    <text class="money">￥{{  money ?  money : '' }} </text>
+    <text class="money">￥{{  item.money ?  item.money : '' }} </text>
     <view>
       <image class="delete cate-icon" src="../../static/images/delete-HL.png" mode=""></image>
     </view>
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+  import { dateUtils } from '@/common/util.js'
+  
   export default {
     name: 'h-record',
     data() {
@@ -23,12 +25,19 @@
         img: '',
       }
     },
-    props: ['image', 'time', 'icon', 'reason', 'money'],
+    computed:{
+      shortDate(){
+        return dateUtils.format_short(this.item.time)
+      }
+    },
+    props: ['item'],
     methods: {
-
+      handleClick(){
+        this.$emit("modify")
+      }
     },
     created() {
-      this.img = this.image || ''; //从组件获取图片，如果没有则不显示图片
+     
     }
   }
 </script>

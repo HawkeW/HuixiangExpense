@@ -11,13 +11,15 @@
         }
         ,{
             "path" : "pages/bills/bills",
-            "style" : {}
+            "style" : {
+              "navigationBarTitleText": "账单"
+            }
         }
     ],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
+		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#f2f2f2",
+		"navigationBarBackgroundColor": "#8ec756",
 		"backgroundColor": "#f2f2f2"
 	},
   "tabBar": {

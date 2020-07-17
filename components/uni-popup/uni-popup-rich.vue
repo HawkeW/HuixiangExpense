@@ -1,86 +1,105 @@
 <template>
-  <view class="uni-pop-rich wrapper">
-    <view class="selector wrapper-child" :class="{ 'selector-top':!showCate,'selector-top-none':showCate }" @click="showCate=!showCate">
-      <radio-group name="" :class="{ catesShow:showCate,  cates: !showCate }" :style="{ opacity: showCate? 1:0}">
-        <label v-for="(item,index) in reasons" :key="index" @click="showCate = false">
-          <image class="icon" :src="`../../static/images/categories/${ item.icon }`" mode="aspectFit"></image><text
-            class="n-text">{{ item.reason }}</text>
-        </label>
-      </radio-group>
-      <label>
-        <image class="icon" :src="`../../static/images/categories/c-transport.png`" mode="aspectFit"></image><text
-          class="n-text">交通</text>
-      </label>
+  <view class="">
+    <view class="uni-pop-rich wrapper" v-show="!calendarShow">
+      <!-- 分类 -->
+      <view class="wrapper-child-left">
+        <hxd-drop-menu :selections="reasons" :selected="item.reason.id" :show="showReasons" type="radio" @select="selectReason" />
+      </view>
+      <!--金额 -->
+      <view class="wrapper-child-right">
+        <input class="input input-box" v-model="item.money" placeholder="消费金额" type="digit"></input>
+      </view>
+      <!--日期 -->
+      <view class="wrapper-child-left">
+        <view class="selector" @click="showCalendar">
+          <image class="icon" src="@/static/images/agenda.png" mode="aspectFit"></image>
+          <text class="medium s-text">{{shortDate}}</text>
+        </view>
+      </view>
+      <!--备注 -->
+      <view class="wrapper-child-right">
+        <input class="input input-box" v-model="item.note" placeholder="备注, 如: 早餐"></input>
+      </view>
+      <view class="wrapper-child-left">
+        <hxd-drop-menu :selections="item.bills" :show="showBill" type="checkbox" @check="checkBills" />
+      </view>
+      <button class="btn wrapper-child-right" @click="close">确认</button>
     </view>
-    <view class="input wrapper-child">
-      <input class="input-box" v-model="money"></input>
-    </view>
-    <view class="selector wrapper-child selector-top">
-      <image class="icon" src="../../static/images/agenda.png" mode="aspectFit"></image>
-      <text class="medium s-text">5月14日</text>
-    </view>
-    <view class="input wrapper-child">
-      <!-- <text class="input-text medium s-text">{{ reason }}</text> -->
-      <input class="input-box" v-model="note"></input>
-    </view>
-    <view class="selector wrapper-child selector-top">
-      <image class="icon" src="../../static/images/bill.png" mode="aspectFit"></image>
-      <text class="n-text">账单</text>
-    </view>
-    <button class="btn" @click="close">确认</button>
+    <uni-calendar :date="item.time" :showMonth="false" :insert="true" v-show="calendarShow" ref="calendar" @change="changeDate" />
   </view>
 </template>
 
 <script>
+  import hxdDropMenu from '@/components/hxd-drop-menu.vue'
+  import {
+    dateUtils
+  } from '@/common/util.js'
   export default {
     name: 'UniPopupRich',
+    components: {
+      hxdDropMenu
+    },
     props: {
       title: {
         type: String,
         default: "添加一条数据"
+      },
+      current:{
+        type:Object,
+        default: function() {
+          return {}
+        }
       }
     },
     inject: ['popup'],
     data() {
       return {
-        note: '',
+        item: {},
+        calendarShow: false,
         reasons: [{
-            id: '1',
+            id: 1,
             reason: '交通',
-            icon: 'c-transport.png',
+            icon: '../../static/images/categories/c-transport.png',
           },
           {
-            id: '2',
+            id: 2,
             reason: '生活',
-            icon: 'c-life.png',
+            icon: '../../static/images/categories/c-life.png',
           },
           {
-            id: '3',
+            id: 3,
             reason: '日用',
-            icon: 'c-daily.png',
+            icon: '../../static/images/categories/c-daily.png',
           }, {
-            id: '4',
+            id: 4,
             reason: '服饰',
-            icon: 'c-clothes.png',
+            icon: '../../static/images/categories/c-clothes.png',
           }, {
-            id: '5',
+            id: 5,
             reason: '餐饮',
-            icon: 'c-food.png',
+            icon: '../../static/images/categories/c-food.png',
           }, {
-            id: '6',
+            id: 6,
             reason: '娱乐',
-            icon: 'c-game.png',
+            icon: '../../static/images/categories/c-game.png',
           },
         ],
-        money: 20,
-        showCate: false,
-        showBill: false
+        showReasons: false,
+        showBill: false,
       }
     },
-    computed: {},
+    created() {
+      this.item = this.current;
+      console.log(this.current)
+    },
+    computed: {
+      shortDate() {
+        return dateUtils.format_short(this.item.time);
+      }
+    },
     methods: {
       handleClick(e) {
-        console.log(e)
+        console.log(e);
       },
       /**
        * 定义的选择事件，选择内容后触发
@@ -101,6 +120,35 @@
       close() {
         // 执行父组件的close事件，关闭弹出层
         this.popup.close()
+      },
+      selectReason(index) {
+        this.item.reason = this.reasons[index];
+         this.$emit("update", this.item);
+      },
+      checkBills(arr) {
+        console.log(arr)
+        var billIds = [];
+        billIds = arr.value;
+        this.item.bills.forEach(item => {
+          if (billIds.indexOf(item.id.toString()) !== -1) {
+            item.checked = true;
+          } else {
+            item.checked = false;
+          }
+        })
+        console.log(this.item.bills)
+      },
+      showCalendar() {
+        this.calendarShow = !this.calendarShow;
+        this.$refs.calendar.open()
+      },
+      changeDate(e) {
+        this.item.time = e.fulldate;
+        
+        this.$emit("update", this.item)
+        
+        this.showCalendar();
+        this.$refs.calendar.close()
       }
     }
   }
@@ -124,24 +172,32 @@
     flex-flow: wrap;
   }
 
-  .wrapper-child {
+  .wrapper-child-left,
+  .wrapper-child-right {
     box-sizing: border-box;
-    width: 50%;
     height: 88rpx;
+    align-items: center;
+    margin-bottom: 30rpx;
   }
 
+  .wrapper-child-left {
+    width: 39%;
+  }
+
+  .wrapper-child-right {
+    width: 61%;
+  }
+
+
   .selector {
-    position:relative;
+    position: relative;
     display: flex;
     flex-direction: row;
     width: 250rpx;
     height: 88rpx;
     background-color: #FFFFFF;
     border-style: solid;
-    border-bottom-left-radius: 44rpx;
-    border-bottom-right-radius: 44rpx;
-    margin-bottom: 30rpx;
-    margin-left: 30rpx;
+    border-radius: 44rpx;
     line-height: 88rpx;
   }
 
@@ -199,7 +255,6 @@
   .input {
     width: 410rpx;
     height: 88rpx;
-    margin-left: 30rpx;
     background-color: #FFFFFF;
     font-size: 32rpx;
     text-align: center;
@@ -241,5 +296,10 @@
 
   .btn ::hover {
     background-color: #3e7c00;
+  }
+
+  .calendar {
+    position: absolute;
+    z-index: 999;
   }
 </style>
