@@ -1,9 +1,9 @@
 <template>
   <view class="">
     <view class="uni-pop-rich wrapper" v-show="!calendarShow">
-      <!-- 分类 -->
+      <!-- 分类 - 单选 -->
       <view class="wrapper-child-left">
-        <hxd-drop-menu :selections="reasons" :selected="item.reason.id" :show="showReasons" type="radio" @select="selectReason" />
+        <hxd-menu :options="reasons" type="radio" @select="selectReason" :index="currentIndex" />
       </view>
       <!--金额 -->
       <view class="wrapper-child-right">
@@ -20,64 +20,39 @@
       <view class="wrapper-child-right">
         <input class="input input-box" v-model="item.note" placeholder="备注, 如: 早餐"></input>
       </view>
+      <!-- 账单 - 复选 -->
       <view class="wrapper-child-left">
-        <hxd-drop-menu :selections="item.bills" :show="showBill" type="checkbox" @check="checkBills" />
+        <hxd-menu :options="item.bills" type="checkbox" :index="0" @check="checkBills" />
       </view>
-      <button class="btn wrapper-child-right" @click="close">确认</button>
+      <!-- 确认按钮 -->
+      <button class="btn wrapper-child-right" @click="confirm">确认</button>
     </view>
+    <!--日历 -->
     <uni-calendar :date="item.time" :showMonth="false" :insert="true" v-show="calendarShow" ref="calendar" @change="changeDate" />
   </view>
 </template>
 
 <script>
   import hxdDropMenu from '@/components/hxd-drop-menu.vue'
+  import hxdMenu from '@/components/hxd-menu.vue'
   import {
     dateUtils
   } from '@/common/util.js'
   export default {
     name: 'UniPopupRich',
     components: {
-      hxdDropMenu
+      hxdDropMenu,
+      hxdMenu
     },
     props: {
       title: {
         type: String,
         default: "添加一条数据"
       },
-      current:{
-        type:Object,
+      current: {
+        type: Object,
         default: function() {
-          let obj = {
-              id: '99',
-              time: '2020-07-11',
-              reason: {
-                id: 1,
-                reason: '交通',
-                icon: '../../static/images/categories/c-transport.png',
-              },
-              bills: [{
-                  id: 2,
-                  reason: '个人账单',
-                  icon: '../../static/images/bill.png',
-                  checked: false
-                },
-                {
-                  id: 3,
-                  reason: '家',
-                  icon: '../../static/images/bill.png',
-                  checked: true
-                },
-                {
-                  id: 4,
-                  reason: '吃',
-                  icon: '../../static/images/bill.png',
-                  checked: false
-                },
-              ],
-              money: '0',
-              note: '',
-            };
-          return obj;
+          return this.obj;
         }
       }
     },
@@ -85,6 +60,36 @@
     data() {
       return {
         item: {},
+        obj: {
+          id: '99',
+          time: '2020-07-11',
+          reason: {
+            id: 1,
+            reason: '交通',
+            icon: '../../static/images/categories/c-transport.png',
+          },
+          bills: [{
+              id: 2,
+              reason: '个人账单',
+              icon: '../../static/images/bill.png',
+              checked: false
+            },
+            {
+              id: 3,
+              reason: '家',
+              icon: '../../static/images/bill.png',
+              checked: true
+            },
+            {
+              id: 4,
+              reason: '吃',
+              icon: '../../static/images/bill.png',
+              checked: false
+            },
+          ],
+          money: '0',
+          note: '',
+        },
         calendarShow: false,
         reasons: [{
             id: 1,
@@ -114,17 +119,31 @@
             icon: '../../static/images/categories/c-game.png',
           },
         ],
-        showReasons: false,
-        showBill: false,
       }
     },
     created() {
+      if (JSON.stringify(this.current) !== '{}') {
         this.item = this.current;
-      console.log( this.current)
+      } else {
+        this.item = this.obj;
+      }
+
+      console.log(this.item)
     },
     computed: {
       shortDate() {
         return dateUtils.format_short(this.item.time);
+      },
+      currentIndex() {
+        let index = 0;
+        if (this.item.hasOwnProperty("id")) {
+          this.reasons.forEach((item, ind) => {
+            if (item.id === this.item.reason.id) {
+              index = ind;
+            }
+          })
+        }
+        return index;
       }
     },
     methods: {
@@ -147,38 +166,45 @@
       /**
        * 关闭窗口
        */
-      close() {
+      confirm() {
         // 执行父组件的close事件，关闭弹出层
-        this.popup.close()
+        if (this.item.hasOwnProperty("id")) {
+          this.$emit('update', this.item)
+          this.popup.close()
+        } else {
+          this.$emit('update', this.item)
+          this.$emit('add', this.item)
+          this.popup.close();
+        }
+
       },
       selectReason(index) {
+        this.index = index;
         this.item.reason = this.reasons[index];
-         this.$emit("update", this.item);
+        // this.$emit("update", this.item);
       },
       checkBills(arr) {
         var billIds = [];
         billIds = arr.value;
-        if(this.item.hasOwnProperty("id")){
+        if (this.item.hasOwnProperty("id")) {
           //获取选中的账单
           this.item.bills.forEach(bill => {
-            if (billIds.indexOf(bill.id.toString()) !== -1) {
+            if (billIds.indexOf(bill.reason.toString()) !== -1) {
               bill.checked = true;
             } else {
               bill.checked = false;
             }
           })
-        }else{
+        } else {
           //获取选中的账单
-          this.item.bills.forEach(bill => {
-            if (billIds.indexOf(bill.id.toString()) !== -1) {
+          this.item.bills.forEach((bill, index) => {
+            if (!index) {
               bill.checked = true;
             } else {
               bill.checked = false;
             }
           })
         }
-
-        
       },
       showCalendar() {
         this.calendarShow = !this.calendarShow;
@@ -186,9 +212,7 @@
       },
       changeDate(e) {
         this.item.time = e.fulldate;
-        
-        this.$emit("update", this.item)
-        
+        // this.$emit("update", this.item)
         this.showCalendar();
         this.$refs.calendar.close()
       }

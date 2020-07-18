@@ -11,7 +11,7 @@
 	 * @description 弹出层-消息提示
 	 * @tutorial https://ext.dcloud.net.cn/plugin?id=329
 	 * @property {String} type = [success|warning|info|error] 主题样式
-	 *  @value success 成功
+	 *   @value success 成功
 	 * 	@value warning 提示
 	 * 	@value info 消息
 	 * 	@value error 错误

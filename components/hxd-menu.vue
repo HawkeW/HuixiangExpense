@@ -1,37 +1,38 @@
 <template>
-  <view class="menu">
-    <view class="box menu-item box-top">
-      <label @click="clickLable" class="lable">
-        <image class="image" :src="current.icon" mode="aspectFit"></image>
-        <text class="text">{{current.reason}}</text>
-      </label>
-      <!-- 单选 -->
-      <radio-group v-if="type==='radio'" name="" class="radios-hide" :class="{ 'radios-show': showRadios }" style="z-index:1;">
-        <label v-for="(item, index) in selections" :key="index" class="item" :class="{ selected:(index+1)===selected }"
-          @click="clickSelection(index)">
-          <image class="image" :src="item.icon" mode="aspectFit"></image>
-          <text class="text">{{ item.reason }}</text>
-        </label>
-        <view class="bottom"></view>
-      </radio-group>
-      <!-- 复选-->
-      <checkbox-group @change="checkLable"  v-else name="" class="radios-hide" :class="{ 'radios-show': showRadios }" style="z-index:1;">
-        <label v-for="(item, index) in selections" :key="index" class="check-item">
-              <checkbox :value="String(item.id)"  color="#73B92D" class="checkbox" :checked="item.checked" />
-              <text class="text">{{item.reason}}</text>
-        </label>
-        <view class="bottom"></view>
-      </checkbox-group>
-    </view>
-  </view>
+	<view>
+		<view class="menu">
+		  <view class="box menu-item box-top">
+		    <label  class="lable" @click="handleClick">
+		      <image class="image" :src="current.icon" mode="aspectFit"></image>
+		      <text class="text">{{current.reason}}</text>
+		    </label>
+		    <!-- 单选 -->
+		    <radio-group v-if="type==='radio'" class="radios-hide" :class="{ 'radios-show': show }" style="z-index:1;">
+		      <label v-for="(item, index1) in options" :key="index1" class="item" :class="{ selected:index1===index }"
+		        @click="select(index1)">
+		        <image class="image" :src="item.icon" mode="aspectFit"></image>
+		        <text class="text">{{ item.reason }}</text>
+		      </label>
+		      <view class="bottom"></view>
+		    </radio-group>
+		    <!-- 复选-->
+		    <checkbox-group v-else   class="radios-hide" :class="{ 'radios-show': show }" style="z-index:1;" @change="check">
+		      <label v-for="(item, index1) in options" :key="index1" class="check-item">
+		            <checkbox :value="item.reason"  color="#73B92D" class="checkbox" :checked="item.checked" />
+		            <text class="text">{{ item.reason }}</text>
+		      </label>
+		      <view class="bottom"></view>
+		    </checkbox-group>
+		  </view>
+		</view>
+	</view>
 </template>
 
 <script>
   /**
    * HxdDropMenu 下拉框（向上展开）
-   * @selections 所有选项
-   * @selected 单选选中的对象
-   * @show 显示/隐藏
+   * @options 所有选项
+   * @index 单选选中的对象
    * @type radio单选
    * @type checkbox 多选
    * @ 方法
@@ -41,47 +42,39 @@
   export default {
     data() {
       return {
-        showRadios: false
+        show: false
       };
     },
     computed: {
       current() {
-        return this.selections[this.selected - 1];
+        return this.options[this.index];
       }
     },
-    created() {
-      console.log(this.selections)
-    },
     props: {
-      selections: {
+      options: {
         type: Array,
         default: function(){
           return []
         }
       },
-      selected: {
+      index: {
         type: Number,
-        default: 1
-      },
-      show: {
-        type: Boolean,
-        default: false
+        default: 0
       },
       type: {
         type: String,
-        default: ""
+        default: "radio"
       }
     },
     methods: {
-      clickSelection(index) {
+      select(index) {
         this.$emit("select", index)
-        this.showRadios = !this.showRadios;
-        console.log(index)
+        this.show = !this.show;
       },
-      clickLable() {
-        this.showRadios = !this.showRadios;
+      handleClick() {
+        this.show = !this.show;
       },
-      checkLable(e) {
+      check(e) {
         this.$emit("check", e.detail);
       }
     }
