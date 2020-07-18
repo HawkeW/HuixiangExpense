@@ -47,6 +47,10 @@ var dateUtils = {
 		};
 		return date.getFullYear() + '/' + _format(date.getMonth() + 1) + '/' + _format(date.getDate());
 	},
+  yyyymmdd: function (){
+    var date = new Date();
+    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+  },
 	parse: function (str) { //将"yyyy-mm-dd HH:MM:ss"格式的字符串，转化为一个Date对象
 		var a = str.split(/[^0-9]/);
 		return new Date(a[0], a[1] - 1, a[2], a[3], a[4], a[5]);
