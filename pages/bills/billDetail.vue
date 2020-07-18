@@ -8,20 +8,15 @@
       <uni-popup-rich @update="handleUpdate" :current="current" @confirm="add"></uni-popup-rich>
       <view class="bottom"></view>
     </uni-popup>
-    <!--    <uni-fab 
-      :popMenu="false"
-      @click="open"
-      @fabClick="open"
-     ></uni-fab> -->
     <view class="" @click="toAdd">
       <hxd-fab />
     </view>
-
+      <view class="uni-tabbar"></view>
   </view>
 </template>
 
 <script>
-  import hRecord from './hRecord.vue'
+  import hRecord from '../home/hRecord.vue'
   import uniPopup from '@/components/uni-popup/uni-popup.vue'
   import uniFab from '@/components/uni-fab/uni-fab.vue'
   import uniPopupRich from '@/components/uni-popup/uni-popup-rich.vue'
@@ -204,7 +199,16 @@
 </script>
 
 <style>
+  page{
+    padding: 0;
+    background-color: "#f2f2f2"
+  }
   .bottom {
     height: 100rpx;
+  }
+  .uni-tabbar{
+    height: 50px;
+    position:fixed;
+    bottom: 0;
   }
 </style>

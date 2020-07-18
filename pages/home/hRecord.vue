@@ -53,8 +53,8 @@
     border-bottom: 2rpx;
     border-color: #E5E5E5;
     border-style: solid;
-     padding-left: 30rpx;
-     padding-right: 30rpx;
+/*     padding-left: 30rpx;
+     padding-right: 30rpx; */
   }
 .wrapper:hover{
    background-color: #cccccc;
