@@ -21,6 +21,8 @@
 </template>
 
 <script>
+  import {getExpenses} from '@/common/api/bill.js'
+  import {mapState, mapMutations} from 'vuex'
   import hRecord from './hRecord.vue'
   import uniPopup from '@/components/uni-popup/uni-popup.vue'
   import uniFab from '@/components/uni-fab/uni-fab.vue'
@@ -30,12 +32,35 @@
     dateUtils
   } from '@/common/util.js'
   export default {
+    computed:{
+      ...mapState(['user','hasLogin'])
+    },
     components: {
       hRecord,
       uniPopup,
       uniFab,
       uniPopupRich,
       hxdFab
+    },
+    onLoad(){
+      try{
+        const user = uni.getStorageSync('user')
+        console.log(user)
+        if(user.hasOwnProperty('user_id')){
+          this.setHasLogin(true);
+          this.setUser(user);
+        }
+      }catch(err){
+        console.log(err)
+      }
+      if(!this.hasLogin){
+        uni.navigateTo({url:'../login/login'})
+      }else{
+         this.getList()
+      }
+    },
+    watch:{
+
     },
     data() {
       return {
@@ -165,6 +190,15 @@
       }
     },
     methods: {
+      ...mapMutations(['setUser','setHasLogin']),
+      getList(){
+        getExpenses({user_id:this.user.user_id+'' }).then(res=>{
+          const { data, errCod, errMsg } = res.data;
+          if(errCod===0){
+            this.dataList = data;
+          }
+        })
+      },
       modify(index) {
         this.currentIndex = index;
         this.current = this.dataList[index];

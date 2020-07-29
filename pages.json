@@ -20,7 +20,29 @@
       "navigationBarTitleText": "账单",
       "backgroundColor": "#FFFFFF"
     }
-  }],
+  },
+  {
+    "path": "pages/login/login",
+    "style": {
+      "navigationBarTitleText": "登录",
+      "backgroundColor": "#FFFFFF"
+    }
+  } ,
+  {
+    "path": "pages/login/register",
+    "style": {
+      "navigationBarTitleText": "注册",
+      "backgroundColor": "#FFFFFF"
+    }
+  } ,
+  {
+    "path": "pages/login/reset",
+    "style": {
+      "navigationBarTitleText": "重置密码",
+      "backgroundColor": "#FFFFFF"
+    }
+  } 
+    ],
   "globalStyle": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "uni-app",

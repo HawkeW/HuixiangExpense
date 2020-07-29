@@ -38,6 +38,7 @@ var dateUtils = {
 	},
 	format: function (dateStr) {
 		var date = this.parse(dateStr)
+    
 		var diff = Date.now() - date.getTime();
 		if (diff < this.UNITS['天']) {
 			return this.humanize(diff);
@@ -57,8 +58,7 @@ var dateUtils = {
 	},
   // 汉字显示
   format_short: function (dateStr){
-    var b = dateStr.split(/[^0-9]/);
-    var date = new Date(b[0], b[1] - 1, b[2]);
+    var date = new Date(dateStr)
     return (date.getMonth() + 1) + '月' + (date.getDate())+'日';
   }
 };
