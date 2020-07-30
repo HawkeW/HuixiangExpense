@@ -3,11 +3,11 @@
     <view class="uni-pop-rich wrapper" v-show="!calendarShow">
       <!-- 分类 - 单选 -->
       <view class="wrapper-child-left">
-        <hxd-menu :options="reasons" type="radio" @select="selectReason" :index="currentIndex" />
+        <hxd-menu :options="options" type="radio" @select="selectReason" :index="currentIndex" />
       </view>
       <!--金额 -->
       <view class="wrapper-child-right">
-        <input class="input input-box" v-model="item.money" placeholder="消费金额" type="digit"></input>
+        <input class="input input-box" v-model="firstInput" placeholder="消费金额" type="digit"></input>
       </view>
       <!--日期 -->
       <view class="wrapper-child-left">
@@ -18,17 +18,17 @@
       </view>
       <!--备注 -->
       <view class="wrapper-child-right">
-        <input class="input input-box" v-model="item.note" placeholder="备注, 如: 早餐"></input>
+        <input class="input input-box" v-model="secondInput" placeholder="备注, 如: 早餐"></input>
       </view>
       <!-- 账单 - 复选 -->
       <view class="wrapper-child-left">
-        <hxd-menu :options="item.bills" type="checkbox" :index="0" @check="checkBills" />
+        <hxd-menu :options="options2" type="checkbox" :index="0" @check="checkBills" />
       </view>
       <!-- 确认按钮 -->
       <button class="btn wrapper-child-right" @click="confirm">确认</button>
     </view>
     <!--日历 -->
-    <uni-calendar :date="item.time" :showMonth="false" :insert="true" v-show="calendarShow" ref="calendar" @change="changeDate" />
+    <uni-calendar :date="shortDate" :showMonth="false" :insert="true" v-show="calendarShow" ref="calendar" @change="changeDate" />
   </view>
 </template>
 
@@ -49,10 +49,28 @@
         type: String,
         default: "添加一条数据"
       },
-      current: {
-        type: Object,
+      options:{
+        type: Array,
         default: function() {
-          return this.obj;
+          return [];
+        }
+      },
+      firstInput:{
+        type: String,
+        default: "消费金额"
+      },
+      secondInput:{
+        type: String,
+        default: "备注：如聚餐"
+      },
+      date:{
+        type: String,
+        default: "2020-07-19 14:22:00"
+      },
+      options2:{
+        type: Array,
+        default: function() {
+          return [];
         }
       }
     },
@@ -68,71 +86,15 @@
             reason: '交通',
             icon: '../../static/images/categories/c-transport.png',
           },
-          bills: [{
-              id: 2,
-              reason: '个人账单',
-              icon: '../../static/images/bill.png',
-              checked: false
-            },
-            {
-              id: 3,
-              reason: '家',
-              icon: '../../static/images/bill.png',
-              checked: true
-            },
-            {
-              id: 4,
-              reason: '吃',
-              icon: '../../static/images/bill.png',
-              checked: false
-            },
-          ],
           money: '0',
           note: '',
         },
         calendarShow: false,
-        reasons: [{
-            id: 1,
-            reason: '交通',
-            icon: '../../static/images/categories/c-transport.png',
-          },
-          {
-            id: 2,
-            reason: '生活',
-            icon: '../../static/images/categories/c-life.png',
-          },
-          {
-            id: 3,
-            reason: '日用',
-            icon: '../../static/images/categories/c-daily.png',
-          }, {
-            id: 4,
-            reason: '服饰',
-            icon: '../../static/images/categories/c-clothes.png',
-          }, {
-            id: 5,
-            reason: '餐饮',
-            icon: '../../static/images/categories/c-food.png',
-          }, {
-            id: 6,
-            reason: '娱乐',
-            icon: '../../static/images/categories/c-game.png',
-          },
-        ],
       }
-    },
-    created() {
-      if (JSON.stringify(this.current) !== '{}') {
-        this.item = this.current;
-      } else {
-        this.item = this.obj;
-      }
-
-      console.log(this.item)
     },
     computed: {
       shortDate() {
-        return dateUtils.format_short(this.item.time);
+        return dateUtils.format_short(this.date);
       },
       currentIndex() {
         let index = 0;

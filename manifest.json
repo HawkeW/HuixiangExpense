@@ -53,17 +53,8 @@
     "title": "茴香豆",
     "domain": "",
     "router": {
-      "base": "/HuixiangExpense"
-    },
-    "devServer": {
-      "proxy": {
-        "/prefix/": {
-          "target": "http://129.211.77.253:8000",
-          "pathRewrite": {
-            "^/prefix": ""
-          }
-        }
-      }
+      "base": "/HuixiangExpense",
+      "mode": "history"
     }
   }
 }

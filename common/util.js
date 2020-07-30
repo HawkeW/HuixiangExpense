@@ -64,7 +64,15 @@ var dateUtils = {
 };
 
 
+var moenyUtils = {
+  twoDecimals: function (str){
+    let money = parseFloat(str);
+    money = money.toFixed(2)
+    return money;
+  }
+}
 module.exports = {
 	formatTime: formatTime,
-	dateUtils: dateUtils
+	dateUtils: dateUtils,
+  moenyUtils: moenyUtils
 }

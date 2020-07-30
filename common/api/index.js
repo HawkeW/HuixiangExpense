@@ -3,7 +3,7 @@ import store from '../../store/index.js'
 
 const http = new Request();
 http.setConfig((config) => {
-  config.baseURL = ''; 
+  config.baseURL = 'http://129.211.77.253:8000'; 
   return config
 })
 export default {

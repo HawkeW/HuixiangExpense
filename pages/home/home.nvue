@@ -5,14 +5,16 @@
       </h-record>
     </view>
     <uni-popup ref="popup" type="bottom" :maskClick="true" :animation="true">
-      <uni-popup-rich @update="handleUpdate" :current="current" @confirm="add"></uni-popup-rich>
+      <uni-popup-rich 
+      :options="reasons"
+      :options2="bills"
+      :firstInput="current.expense_cost"
+      :secondInput="current.expense_content"
+      :date="current.expense_time"
+      @update="handleUpdate" 
+      @confirm="add"></uni-popup-rich>
       <view class="bottom"></view>
     </uni-popup>
-    <!--    <uni-fab 
-      :popMenu="false"
-      @click="open"
-      @fabClick="open"
-     ></uni-fab> -->
     <view class="" @click="toAdd">
       <hxd-fab />
     </view>
@@ -33,7 +35,11 @@
   } from '@/common/util.js'
   export default {
     computed:{
-      ...mapState(['user','hasLogin'])
+      ...mapState(['user','hasLogin']),
+      current(){
+        console.log(this.dataList[this.currentIndex])
+        return this.dataList[this.currentIndex];
+      }
     },
     components: {
       hRecord,
@@ -59,134 +65,57 @@
          this.getList()
       }
     },
-    watch:{
-
-    },
     data() {
       return {
-        dataList: [{
-            id: '15',
-            time: '2020-07-11',
-            reason: {
-              id: 1,
-              reason: '交通',
-              icon: '../../static/images/categories/c-transport.png',
-            },
-            bills: [{
-                id: 2,
-                reason: '个人账单',
-                icon: '../../static/images/bill.png',
-                checked: false
-              },
-              {
-                id: 3,
-                reason: '家',
-                icon: '../../static/images/bill.png',
-                checked: true
-              },
-              {
-                id: 4,
-                reason: '吃',
-                icon: '../../static/images/bill.png',
-                checked: false
-              },
-            ],
-            money: '6.9',
-            note: '',
-          },
-          {
-            id: '16',
-            time: '2020-07-12',
-            reason: {
+        dataList: [],
+        bills: [{
               id: 2,
-              reason: '交通',
-              icon: '../../static/images/categories/c-transport.png',
+              reason: '个人账单',
+              icon: '../../static/images/bill.png',
+              checked: false
             },
-            bills: [{
-                id: 2,
-                reason: '个人账单',
-                icon: '../../static/images/bill.png',
-                checked: false
-              },
-              {
-                id: 3,
-                reason: '家',
-                icon: '../../static/images/bill.png',
-                checked: true
-              },
-              {
-                id: 4,
-                reason: '吃',
-                icon: '../../static/images/bill.png',
-                checked: false
-              },
-            ],
-            money: '3',
-            note: '',
+            {
+              id: 3,
+              reason: '家',
+              icon: '../../static/images/bill.png',
+              checked: true
+            },
+            {
+              id: 4,
+              reason: '吃',
+              icon: '../../static/images/bill.png',
+              checked: false
+            },
+          ],
+        currentIndex: 0,
+        reasons: [{
+            id: 1,
+            reason: '交通',
+            icon: '../../static/images/categories/c-transport.png',
           },
           {
-            id: '17',
-            time: '2020-07-15',
-            reason: {
-              id: 1,
-              reason: '交通',
-              icon: '../../static/images/categories/c-transport.png',
-            },
-            bills: [{
-                id: 2,
-                reason: '个人账单',
-                icon: '../../static/images/bill.png',
-                checked: false
-              },
-              {
-                id: 3,
-                reason: '家',
-                icon: '../../static/images/bill.png',
-                checked: true
-              },
-              {
-                id: 4,
-                reason: '吃',
-                icon: '../../static/images/bill.png',
-                checked: false
-              },
-            ],
-            money: '5.03',
-            note: '',
+            id: 2,
+            reason: '生活',
+            icon: '../../static/images/categories/c-life.png',
           },
           {
-            id: '18',
-            time: '2020-07-17',
-            reason: {
-              id: 1,
-              reason: '交通',
-              icon: '../../static/images/categories/c-transport.png',
-            },
-            bills: [{
-                id: 2,
-                reason: '个人账单',
-                icon: '../../static/images/bill.png',
-                checked: false
-              },
-              {
-                id: 3,
-                reason: '家',
-                icon: '../../static/images/bill.png',
-                checked: true
-              },
-              {
-                id: 4,
-                reason: '吃',
-                icon: '../../static/images/bill.png',
-                checked: false
-              },
-            ],
-            money: '11',
-            note: '',
-          }
+            id: 3,
+            reason: '日用',
+            icon: '../../static/images/categories/c-daily.png',
+          }, {
+            id: 4,
+            reason: '服饰',
+            icon: '../../static/images/categories/c-clothes.png',
+          }, {
+            id: 5,
+            reason: '餐饮',
+            icon: '../../static/images/categories/c-food.png',
+          }, {
+            id: 6,
+            reason: '娱乐',
+            icon: '../../static/images/categories/c-game.png',
+          },
         ],
-        current: {},
-        currentIndex: 0
       }
     },
     methods: {
@@ -196,12 +125,12 @@
           const { data, errCod, errMsg } = res.data;
           if(errCod===0){
             this.dataList = data;
+            console.log(data)
           }
         })
       },
       modify(index) {
         this.currentIndex = index;
-        this.current = this.dataList[index];
         this.$refs.popup.open();
       },
       toAdd() {

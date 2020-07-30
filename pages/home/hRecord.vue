@@ -6,9 +6,9 @@
     </view>
     <view class="cate-wrapper">
       <image class="cate-icon" :src="`../../static/images/categories/${ item.icon }`" mode="aspectFit">
-        <text class="cate-text">{{ item.reason.reason }}</text>
+        <text class="cate-text">{{ item.expense_name }}</text>
     </view>
-    <text class="money">￥{{  item.money ?  item.money : '' }} </text>
+    <text class="money">￥{{  money ? money : '' }} </text>
     <view>
       <image class="delete cate-icon" src="../../static/images/delete-HL.png" mode=""></image>
     </view>
@@ -16,8 +16,7 @@
 </template>
 
 <script>
-  import { dateUtils } from '@/common/util.js'
-  
+  import { dateUtils, moenyUtils } from '@/common/util.js'
   export default {
     name: 'h-record',
     data() {
@@ -27,7 +26,10 @@
     },
     computed:{
       shortDate(){
-        return dateUtils.format_short(this.item.time)
+        return dateUtils.format_short(this.item.expense_time)
+      },
+      money(){
+        return moenyUtils.twoDecimals(this.item.expense_cost)
       }
     },
     props: ['item'],
