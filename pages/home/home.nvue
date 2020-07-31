@@ -67,7 +67,14 @@
     },
     data() {
       return {
-        dataList: [],
+        dataList: [
+          {
+            expense_cost:0,
+            expense_time:"2020-07-15 12:10:10",
+            expense_content:"打车",
+            expense_name:"交通"
+          }
+        ],
         bills: [{
               id: 2,
               reason: '个人账单',
@@ -140,15 +147,16 @@
           reason: '交通',
           icon: '../../static/images/categories/c-transport.png',
         };
-        let bills = this.dataList[0].bills
-        this.current = {
-          time: date,
-          reason: reason,
+        let bills = this.bills
+        const current = {
+          expense_time: date,
+          expense_name: "交通",
           bills: bills,
-          money: 0,
-          note: '',
+          expense_cost: "0.00",
+          expense_content: '',
         };
-
+        this.dataList.push(current);
+        this.currentIndex = this.dataList.length - 1;
         this.open()
       },
       add(item) {

@@ -28,7 +28,7 @@
       <button class="btn wrapper-child-right" @click="confirm">确认</button>
     </view>
     <!--日历 -->
-    <uni-calendar :date="shortDate" :showMonth="false" :insert="true" v-show="calendarShow" ref="calendar" @change="changeDate" />
+    <uni-calendar :date="date" :showMonth="false" :insert="true" v-show="calendarShow" ref="calendar" @change="changeDate" />
   </view>
 </template>
 
@@ -159,7 +159,7 @@
           })
         } else {
           //获取选中的账单
-          this.item.bills.forEach((bill, index) => {
+          this.options2.forEach((bill, index) => {
             if (!index) {
               bill.checked = true;
             } else {
