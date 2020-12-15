@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import hRecord from '../home/hRecord.vue'
+  import hRecord from '@/components/hxd-record.vue'
   import uniPopup from '@/components/uni-popup/uni-popup.vue'
   import uniFab from '@/components/uni-fab/uni-fab.vue'
   import uniPopupRich from '@/components/uni-popup/uni-popup-rich.vue'

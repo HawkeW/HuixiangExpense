@@ -42,6 +42,15 @@
       "backgroundColor": "#FFFFFF"
     }
   } 
+        ,{
+            "path" : "pages/demo/demo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
   "globalStyle": {
     "navigationBarTextStyle": "white",

@@ -27,16 +27,16 @@
 </template>
 
 <script>
-  /**
-   * HxdDropMenu 下拉框（向上展开）
-   * @selections 所有选项
-   * @selected 单选选中的对象
-   * @show 显示/隐藏
-   * @type radio单选
-   * @type checkbox 多选
-   * @ 方法
-   *   @select, 选中单选选项
-   *   @check, 复选框选项更改
+  /*
+   HxdDropMenu 下拉框（向上展开）
+  @selections 所有选项
+  @selected 单选选中的对象
+  @show 显示/隐藏
+  @type radio单选
+  @type checkbox 多选
+  @ 方法
+    @select, 选中单选选项
+    @check, 复选框选项更改
    */
   export default {
     data() {

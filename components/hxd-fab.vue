@@ -29,19 +29,20 @@
 		z-index: 12;
     bottom: 130rpx;
     right: 30rpx;
+    text-align: center;
 	}
   
   .fab{
     background-color: #8ec756;
     border-radius: 44rpx;
-    width: 230rpx;
-    height: 86rpx;
-    padding-top: 20rpx; 
+    width: 240rpx;
+    height: 80rpx;
     align-items: center;
   }
   .text{
     color: #FFFFFF;
     font-size: 17px;
+    line-height: 80rpx;
     font-weight: bold;
   }
 </style>
